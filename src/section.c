@@ -30,7 +30,7 @@ void	aff_ascii_line(int j, int *move, unsigned char *w, char *t)
 
 void	print_sect(t_data *s, int index)
 {
-	unsigned char	*w = (unsigned char*)((char*)s->elf64_ehdr
+	unsigned char	*w = (unsigned char *)((char *)s->elf64_ehdr
 	+ (int)s->elf64_shdr[index].sh_offset);
 	int	i = 0;
 	int	addr = s->elf64_shdr[index].sh_addr;
@@ -44,7 +44,7 @@ void	print_sect(t_data *s, int index)
 				printf(" ");
 		addr = ((i % 16 == 0) ? addr + 16: addr);
 		if (i >= (int)s->elf64_shdr[index].sh_size || i % 16 == 0){
-			aff_ascii_line(i, &move, w, (char*)w);
+			aff_ascii_line(i, &move, w, (char *)w);
 			printf("\n");
 		}
 	}
@@ -58,23 +58,25 @@ int	check_section_printable(char *section_n, int size, t_data *s, int i)
 		|| strcmp(section_n, ".symtab") == 0
 		|| strcmp(section_n, ".shstrtab") == 0
 		|| strcmp(section_n, ".strtab") == 0)
-		return (0);
-	if ((s->elf64_ehdr->e_type == ET_REL 
-	     && (s->elf64_shdr[i].sh_type == SHT_REL
-		 || s->elf64_shdr[i].sh_type == SHT_RELA))
-	    || s->elf64_shdr[i].sh_type == SHT_NOBITS)
-		return (0);
+			return (0);
+	if ((s->elf64_ehdr->e_type == ET_REL
+		&& (s->elf64_shdr[i].sh_type == SHT_REL
+		|| s->elf64_shdr[i].sh_type == SHT_RELA))
+		|| s->elf64_shdr[i].sh_type == SHT_NOBITS)
+			return (0);
 	return (1);
 }
 
 void	section(t_data *s)
 {
-	char	*strtab = (char*)(s->file_data 
-				  + s->elf64_shdr[s->elf64_ehdr->e_shstrndx].sh_offset);
+	char	*strtab = (char *)(s->file_data
+			+ s->elf64_shdr[s->elf64_ehdr->e_shstrndx].sh_offset);
 
-	for(int i = 1; i < s->elf64_ehdr->e_shnum; i++){
-		if (check_section_printable(&strtab[s->elf64_shdr[i].sh_name], s->elf64_shdr[i].sh_size, s, i)){
-			printf("Contents of section %s:\n", &strtab[s->elf64_shdr[i].sh_name]);
+	for (int i = 1; i < s->elf64_ehdr->e_shnum; i++){
+		if (check_section_printable(&strtab[s->elf64_shdr[i].sh_name],
+			s->elf64_shdr[i].sh_size, s, i)){
+			printf("Contents of section %s:\n",
+				&strtab[s->elf64_shdr[i].sh_name]);
 			print_sect(s, i);
 		}
 	}

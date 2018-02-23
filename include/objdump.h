@@ -6,7 +6,7 @@
 */
 
 #ifndef OBJDUMP_H_
- #define OBJDUMP_H_
+#define OBJDUMP_H_
 
 #include <stdlib.h>
 #include <sys/types.h>
@@ -35,5 +35,6 @@ typedef	struct	s_data
 
 void	section(t_data *s);
 void	objdump(char *file, t_data *s);
+int	is_elf(t_data *s, char *file);
 
 #endif /* !OBJDUMP_H_ */

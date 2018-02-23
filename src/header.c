@@ -60,7 +60,7 @@ int	print_header(int type, t_data *s)
 		s->flags |= HAS_RELOC;
 	while (i < s->elf64_ehdr->e_shnum){
 		if (s->elf64_shdr[i].sh_type == SHT_SYMTAB
-		    || s->elf64_shdr[i].sh_type == SHT_DYNSYM)
+			|| s->elf64_shdr[i].sh_type == SHT_DYNSYM)
 			s->flags |= HAS_SYMS;
 		if (s->elf64_shdr[i].sh_type == SHT_DYNAMIC)
 			s->flags |= D_PAGED;
@@ -75,22 +75,25 @@ void	archi_64(t_data *s)
 	s->elf64_ehdr = (Elf64_Ehdr*)s->file_data;
 	s->elf64_shdr = (Elf64_Shdr*)(s->file_data + s->elf64_ehdr->e_shoff);
 	printf("architecture: i386:x86-64, flags 0x%08x:\n",
-	       print_header(s->elf64_ehdr->e_type, s));
+	print_header(s->elf64_ehdr->e_type, s));
 	print_flag_header(s);
 	section(s);
 }
 
 void	objdump(char *file, t_data *s)
 {
-	char	*archi = (char*)s->file_data;
+	char	*archi = (char *)s->file_data;
 
 	s->file = file;
 	if (s->filesize < 5){
-		fprintf(stderr, "./my_objdump: %s: File format not recognized\n", file);
+		fprintf(stderr, "./my_objdump: %s: File ", file);
+		fprintf(stderr, "format not recognized\n");
 		return;
 	}
 	if (archi[4] == ELFCLASS64)
 		archi_64(s);
-	else
-		fprintf(stderr, "./my_objdump: %s: File format not recognized\n", file);
+	else {
+		fprintf(stderr, "./my_objdump: %s: File ", file);
+		fprintf(stderr, "format not recognized\n");
+	}
 }
