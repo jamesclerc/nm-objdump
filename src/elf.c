@@ -20,10 +20,10 @@ int	is_elf(t_data *s, char *file)
 	elf_test = (Elf64_Ehdr*)s->file_data;
 	if (s->filesize < sizeof(Elf64_Ehdr*))
 		return (0);
-	if (elf_test->e_ident[EI_MAG0] == ELFMAG0
-		&& elf_test->e_ident[EI_MAG1] == ELFMAG1
-		&& elf_test->e_ident[EI_MAG2] == ELFMAG2
-		&& elf_test->e_ident[EI_MAG3] == ELFMAG3)
+	if (elf_test->e_ident[EI_MAG0] == ELFMAG0 &&
+		elf_test->e_ident[EI_MAG1] == ELFMAG1 &&
+		elf_test->e_ident[EI_MAG2] == ELFMAG2 &&
+		elf_test->e_ident[EI_MAG3] == ELFMAG3)
 		return (1);
 	return (0);
 }
