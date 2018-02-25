@@ -88,6 +88,7 @@ void	objdump(char *file, t_data *s)
 	if (s->filesize < 5){
 		fprintf(stderr, "./my_objdump: %s: File ", file);
 		fprintf(stderr, "format not recognized\n");
+		s->error = 64;
 		return;
 	}
 	if (archi[4] == ELFCLASS64)
@@ -97,5 +98,6 @@ void	objdump(char *file, t_data *s)
 	else {
 		fprintf(stderr, "./my_objdump: %s: File ", file);
 		fprintf(stderr, "format not recognized\n");
+		s->error = 64;
 	}
 }
