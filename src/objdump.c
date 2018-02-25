@@ -35,7 +35,7 @@ int	check_file(char *str, t_data *s)
 		return (0);
 	}
 	if (!is_elf(s, str)){
-		fprintf(stderr, "my_objdump: %s: ", str);
+		fprintf(stderr, "./my_objdump: %s: ", str);
 		fprintf(stderr, "File format not recognized\n");
 		return (0);
 	}
