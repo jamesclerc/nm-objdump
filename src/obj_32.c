@@ -9,21 +9,21 @@
 
 void	print_sect_32(t_data *s, int index)
 {
-	unsigned char	*w = (unsigned char *)((char *)s->elf32_ehdr
-	+ (int)s->elf32_shdr[index].sh_offset);
 	int	i = 0;
 	int	addr = s->elf32_shdr[index].sh_addr;
 	int	move = 0;
+	unsigned char	*tab = (unsigned char *)((char *)s->elf32_ehdr
+	+ (int)s->elf32_shdr[index].sh_offset);
 
 	while (i < (int)s->elf32_shdr[index].sh_size){
 		(i % 16 == 0 ? printf(" %04x ", addr) : 0);
-		printf("%02x", w[i++]);
+		printf("%02x", tab[i++]);
 		if ((i % 4 == 0) && (i % 16)
 			&& (i < (int)s->elf32_shdr[index].sh_size))
 			printf(" ");
 		addr = ((i % 16 == 0) ? addr + 16: addr);
 		if (i >= (int)s->elf32_shdr[index].sh_size || i % 16 == 0){
-			aff_ascii_line(i, &move, w, (char *)w);
+			aff_ascii_line(i, &move, tab, (char *)tab);
 			printf("\n");
 		}
 	}

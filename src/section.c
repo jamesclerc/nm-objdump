@@ -7,7 +7,7 @@
 
 #include "objdump.h"
 
-void	aff_ascii_line(int j, int *move, unsigned char *w, char *t)
+void	aff_ascii_line(int j, int *move, unsigned char *tab, char *t)
 {
 	int	x = j - 1;
 	int	i = (*move);
@@ -18,7 +18,7 @@ void	aff_ascii_line(int j, int *move, unsigned char *w, char *t)
 	}
 	printf("  ");
 	while (i < j){
-		(isprint(w[i]) ? printf("%c", t[i]) : printf("."));
+		(isprint(tab[i]) ? printf("%c", t[i]) : printf("."));
 		i++;
 	}
 	while (i % 16 != 0){
@@ -30,21 +30,21 @@ void	aff_ascii_line(int j, int *move, unsigned char *w, char *t)
 
 void	print_sect(t_data *s, int index)
 {
-	unsigned char	*w = (unsigned char *)((char *)s->elf64_ehdr
-	+ (int)s->elf64_shdr[index].sh_offset);
 	int	i = 0;
 	int	addr = s->elf64_shdr[index].sh_addr;
 	int	move = 0;
+	unsigned char	*tab = (unsigned char *)((char *)s->elf64_ehdr
+		+ (int)s->elf64_shdr[index].sh_offset);
 
 	while (i < (int)s->elf64_shdr[index].sh_size){
 		(i % 16 == 0 ? printf(" %04x ", addr) : 0);
-		printf("%02x", w[i++]);
+		printf("%02x", tab[i++]);
 		if ((i % 4 == 0) && (i % 16)
 			&& (i < (int)s->elf64_shdr[index].sh_size))
 			printf(" ");
 		addr = ((i % 16 == 0) ? addr + 16: addr);
 		if (i >= (int)s->elf64_shdr[index].sh_size || i % 16 == 0){
-			aff_ascii_line(i, &move, w, (char *)w);
+			aff_ascii_line(i, &move, tab, (char *)tab);
 			printf("\n");
 		}
 	}
