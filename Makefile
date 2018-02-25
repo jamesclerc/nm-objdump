@@ -10,7 +10,8 @@ SRCNM	=	src/nm.c
 SRCOBJ	=	src/objdump.c	\
 		src/header.c	\
 		src/section.c	\
-		src/elf.c
+		src/elf.c	\
+		src/obj_32.c
 
 NAMENM	=	my_nm
 

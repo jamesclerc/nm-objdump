@@ -92,6 +92,8 @@ void	objdump(char *file, t_data *s)
 	}
 	if (archi[4] == ELFCLASS64)
 		archi_64(s);
+	else if (archi[4] == ELFCLASS32)
+		archi_32(s);
 	else {
 		fprintf(stderr, "./my_objdump: %s: File ", file);
 		fprintf(stderr, "format not recognized\n");
