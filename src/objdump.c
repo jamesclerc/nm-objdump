@@ -18,7 +18,6 @@ int	check_file2(char *str, t_data *s)
 		close(s->fd);
 		fprintf(stderr, "./my_objdump: '%s' ", str);
 		fprintf(stderr, "is not an ordinary file\n");
-		s->error = 84;
 		return (0);
 	}
 	s->filesize = p.st_size;
@@ -30,17 +29,14 @@ int	check_file(char *str, t_data *s)
 	if ((s->fd = open(str, O_RDONLY)) == -1){
 		close(s->fd);
 		fprintf(stderr, "./my_objdump: '%s': No such file\n", str);
-		s->error = 84;
 		return (0);
 	}
 	if (check_file2(str, s) == 0){
-		s->error = 84;
 		return (0);
 	}
 	if (!is_elf(s, str)){
 		fprintf(stderr, "my_objdump: %s: ", str);
 		fprintf(stderr, "File format not recognized\n");
-		s->error = 84;
 		return (0);
 	}
 	return (1);
@@ -51,6 +47,8 @@ void	multifile(char **av, int ac, t_data *s)
 	while (s->i < ac){
 		if (check_file(av[s->i], s) != 0)
 			objdump(av[s->i], s);
+		else
+			s->error = 84;
 		s->i++;
 	}
 }
@@ -59,6 +57,8 @@ void	single_file(char *av, t_data *s)
 {
 	if (check_file(av, s) != 0)
 		objdump(av, s);
+	else
+		s->error = 84;
 }
 
 int	main(int ac, char **av)
