@@ -5,7 +5,11 @@
 ## Makefile
 ##
 
-SRCNM	=	src/nm.c
+SRCNM	=	nm/main.c	\
+		nm/elf.c	\
+		nm/nm.c		\
+		nm/symbol.c	\
+		nm/flag_nm.c	
 
 SRCOBJ	=	src/objdump.c	\
 		src/header.c	\
@@ -21,7 +25,7 @@ OBJNM	=	$(SRCNM:.c=.o)
 
 OBJOBJ	=	$(SRCOBJ:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -I./include
+CFLAGS	=	-g3 -W -Wall -Wextra -I./include
 
 all:	$(NAMENM) $(NAMEOBJ)
 

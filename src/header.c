@@ -9,13 +9,13 @@
 
 void	print_flag_header2(t_data *s, int prev)
 {
-	if (s->flags & DYNAMIC){
+	if (s->flags & DYNAMIC) {
 		if (prev == 1)
 			printf(", ");
 		printf("DYNAMIC");
 		prev = 1;
 	}
-	if (s->flags & D_PAGED){
+	if (s->flags & D_PAGED) {
 		if (prev == 1)
 			printf(", ");
 		printf("D_PAGED");
@@ -29,17 +29,17 @@ void	print_flag_header(t_data *s)
 {
 	int	prev = 0;
 
-	if (s->flags & HAS_RELOC){
+	if (s->flags & HAS_RELOC) {
 		printf("HAS_RELOC");
 		prev = 1;
 	}
-	if (s->flags & EXEC_P){
+	if (s->flags & EXEC_P) {
 		if (prev == 1)
 			printf(", ");
 		printf("EXEC_P");
 		prev = 1;
 	}
-	if (s->flags & HAS_SYMS){
+	if (s->flags & HAS_SYMS) {
 		if (prev == 1)
 			printf(", ");
 		printf("HAS_SYMS");
@@ -52,6 +52,7 @@ int	print_header(int type, t_data *s)
 {
 	int i = 0;
 
+	s->flags = 0;
 	if (type == ET_EXEC)
 		s->flags |= EXEC_P;
 	else if (type == ET_DYN)

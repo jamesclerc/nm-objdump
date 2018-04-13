@@ -26,19 +26,22 @@ int	check_file2(char *str, t_data *s)
 
 int	check_file(char *str, t_data *s)
 {
-	if ((s->fd = open(str, O_RDONLY)) == -1){
+	s->fd = open(str, O_RDONLY);
+	if (s->fd == -1) {
 		close(s->fd);
 		fprintf(stderr, "./my_objdump: '%s': No such file\n", str);
 		return (0);
 	}
-	if (check_file2(str, s) == 0){
+	if (check_file2(str, s) == 0) {
 		return (0);
 	}
-	if (!is_elf(s, str)){
+	if (!is_elf(s, str)) {
 		fprintf(stderr, "./my_objdump: %s: ", str);
 		fprintf(stderr, "File format not recognized\n");
+		close(s->fd);
 		return (0);
 	}
+	close(s->fd);
 	return (1);
 }
 
@@ -64,6 +67,7 @@ void	single_file(char *av, t_data *s)
 int	main(int ac, char **av)
 {
 	t_data	*s;
+	int res;
 
 	if (!(s = malloc(sizeof(t_data))))
 		return (84);
@@ -73,5 +77,9 @@ int	main(int ac, char **av)
 		multifile(av, ac, s);
 	else if (ac == 1)
 		single_file("a.out", s);
-	return (s->error);
+	if (s->filesize)
+		munmap(s->file_data, s->filesize);
+	res = s->error;
+	free(s);
+	return (res);
 }

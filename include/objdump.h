@@ -27,7 +27,7 @@ typedef	struct	s_data
 	int	i;
 	size_t	filesize;
 	void	*file_data;
-	int	flags;
+	uint	flags;
 	int	error;
 	Elf64_Ehdr	*elf64_ehdr;
 	Elf64_Shdr	*elf64_shdr;
