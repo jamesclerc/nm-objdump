@@ -75,6 +75,7 @@ int main(int ac, char **av)
 
 	if (!s)
 		return 84;
+        setlocale(LC_ALL, "");
 	if (ac == 1) {
 		single_file("a.out", s, ac);
 	}

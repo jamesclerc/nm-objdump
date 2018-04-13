@@ -90,11 +90,11 @@ t_symb **get_symbol(t_data *s)
 		if (s->symb[i].st_info != STT_FILE
 		&& s->symb[i].st_name != 0) {
 			sym[s->id] = sym_tab_create(s, i);
-                        printf("%s  %c  %ld\n", sym[s->id]->name, sym[s->id]->type , sym[s->id]->value);
+                        //printf("%s  %c  %ld\n", sym[s->id]->name, sym[s->id]->type , sym[s->id]->value);
                         s->id = s->id + 1;
 		}
                 i = i + 1;
 	}
-        exit(0);
+        //exit(0);
 	return (sym);
 }
