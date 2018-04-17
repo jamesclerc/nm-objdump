@@ -75,13 +75,13 @@ int main(int ac, char **av)
 
 	if (!s)
 		return 84;
-        setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "");
 	if (ac == 1) {
 		single_file("a.out", s, ac);
 	}
 	else
 		multifile(av, ac, s);
 	res = s->error;
-        free(s);
+	free(s);
 	return res;
 }

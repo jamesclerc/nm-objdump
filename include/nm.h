@@ -31,11 +31,11 @@ typedef	struct	s_data
 	void *file_data;
 	int error;
 	int id;
-        char *secttab;
-        Elf64_Shdr *symtab;
-        Elf64_Shdr *strtab;
-        char *section_sym;
-        Elf64_Sym *symb;
+	char *secttab;
+	Elf64_Shdr *symtab;
+	Elf64_Shdr *strtab;
+	char *section_sym;
+	Elf64_Sym *symb;
 	Elf64_Ehdr *elf64_ehdr;
 	Elf64_Shdr *elf64_shdr;
 } t_data;
@@ -46,7 +46,6 @@ typedef struct s_symb {
 	long value;
 } t_symb;
 
-
 int is_elf(t_data *s, char *file);
 void nm(char *file, t_data *s, int arg);
 t_symb **get_symbol(t_data *s);
@@ -54,6 +53,5 @@ char find_flag(Elf32_Word flag);
 char find_flag4(t_data *s, int i);
 int cmp(const void *s, const void *v);
 int print_everything(t_symb **symb);
-	
 
 #endif /* !NM_H_ */

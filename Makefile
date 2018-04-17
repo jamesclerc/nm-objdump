@@ -9,7 +9,7 @@ SRCNM	=	nm/main.c	\
 		nm/elf.c	\
 		nm/nm.c		\
 		nm/symbol.c	\
-		nm/flag_nm.c	
+		nm/flag_nm.c
 
 SRCOBJ	=	src/objdump.c	\
 		src/header.c	\

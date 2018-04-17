@@ -48,7 +48,6 @@ char find_type2(t_data *s, int i, int bind, int type)
 	if (c == '?')
 		c = find_flag4(s, i);
 	return ((bind != STB_GLOBAL) ? c : toupper(c));
-	
 }
 
 char find_type(int i, t_data *s, char k)
@@ -84,17 +83,15 @@ t_symb **get_symbol(t_data *s)
 	int i = 0;
 	int nb_sym = s->symtab->sh_size / s->symtab->sh_entsize;
 	t_symb **sym = calloc(sizeof(t_symb), nb_sym);
-	
+
 	s->id = 0;
 	while (i < nb_sym){
 		if (s->symb[i].st_info != STT_FILE
-		&& s->symb[i].st_name != 0) {
+			&& s->symb[i].st_name != 0) {
 			sym[s->id] = sym_tab_create(s, i);
-                        //printf("%s  %c  %ld\n", sym[s->id]->name, sym[s->id]->type , sym[s->id]->value);
-                        s->id = s->id + 1;
+			s->id = s->id + 1;
 		}
-                i = i + 1;
+		i = i + 1;
 	}
-        //exit(0);
 	return (sym);
 }
