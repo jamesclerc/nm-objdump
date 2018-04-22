@@ -11,7 +11,7 @@ void free_symb(t_symb **symb)
 {
 	int i = 0;
 
-	while (symb[i]){
+	while (symb[i]) {
 		free(symb[i]);
 		i++;
 	}

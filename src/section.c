@@ -12,16 +12,16 @@ void	aff_ascii_line(int j, int *move, unsigned char *tab, char *t)
 	int	x = j - 1;
 	int	i = (*move);
 
-	while (++x % 16 != 0){
+	while (++x % 16 != 0) {
 		(x % 4 == 0 && x % 16) ? printf(" "): 0;
 		printf("  ");
 	}
 	printf("  ");
-	while (i < j){
+	while (i < j) {
 		(isprint(tab[i]) ? printf("%c", t[i]) : printf("."));
 		i++;
 	}
-	while (i % 16 != 0){
+	while (i % 16 != 0) {
 		printf(" ");
 		i++;
 	}

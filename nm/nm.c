@@ -18,7 +18,7 @@ void check_symbol(t_data *s, char *file)
 	t_symb **symb = NULL;
 	int i = 0;
 
-	if (!s->symtab || (s->symtab->sh_size / s->symtab->sh_entsize) == 0){
+	if (!s->symtab || (s->symtab->sh_size / s->symtab->sh_entsize) == 0) {
 		fprintf(stderr, "./my_nm: %s: no symbols\n", file);
 	} else {
 		add_sym_sect(s);

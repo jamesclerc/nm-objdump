@@ -22,7 +22,8 @@ void	print_flag_header2(t_data *s, int prev)
 		prev = 1;
 	}
 	printf("\n");
-	printf("start address 0x%016zx\n\n", (size_t)(s->elf64_ehdr->e_entry));
+	printf("start address 0x%016zx\n", (size_t)(s->elf64_ehdr->e_entry));
+	printf("\n");
 }
 
 void	print_flag_header(t_data *s)
@@ -59,7 +60,7 @@ int	print_header(int type, t_data *s)
 		s->flags |= DYNAMIC;
 	else if (type == ET_REL)
 		s->flags |= HAS_RELOC;
-	while (i < s->elf64_ehdr->e_shnum){
+	while (i < s->elf64_ehdr->e_shnum) {
 		if (s->elf64_shdr[i].sh_type == SHT_SYMTAB
 			|| s->elf64_shdr[i].sh_type == SHT_DYNSYM)
 			s->flags |= HAS_SYMS;
@@ -86,7 +87,7 @@ void	objdump(char *file, t_data *s)
 	char	*archi = (char *)s->file_data;
 
 	s->file = file;
-	if (s->filesize < 5){
+	if (s->filesize < 5) {
 		fprintf(stderr, "./my_objdump: %s: File ", file);
 		fprintf(stderr, "format not recognized\n");
 		s->error = 64;

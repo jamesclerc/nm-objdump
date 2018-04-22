@@ -11,8 +11,9 @@ int	is_elf(t_data *s, char *file)
 {
 	Elf64_Ehdr	*elf_test;
 
-	s->file_data = mmap(NULL, s->filesize, PROT_READ, MAP_SHARED, s->fd, 0);
-	if (s->file_data == MAP_FAILED){
+	s->file_data = mmap(NULL, s->filesize, PROT_READ, \
+		MAP_SHARED, s->fd, 0);
+	if (s->file_data == MAP_FAILED) {
 		fprintf(stderr, "./my_objdump: '%s': ", file);
 		fprintf(stderr, "memory dumped\n");
 		return (0);
@@ -30,13 +31,13 @@ int	is_elf(t_data *s, char *file)
 
 void	print_flag_header2_32(t_data *s, int prev)
 {
-	if (s->flags & DYNAMIC){
+	if (s->flags & DYNAMIC) {
 		if (prev == 1)
 			printf(", ");
 		printf("DYNAMIC");
 		prev = 1;
 	}
-	if (s->flags & D_PAGED){
+	if (s->flags & D_PAGED) {
 		if (prev == 1)
 			printf(", ");
 		printf("D_PAGED");
@@ -50,17 +51,17 @@ void	print_flag_header_32(t_data *s)
 {
 	int	prev = 0;
 
-	if (s->flags & HAS_RELOC){
+	if (s->flags & HAS_RELOC) {
 		printf("HAS_RELOC");
 		prev = 1;
 	}
-	if (s->flags & EXEC_P){
+	if (s->flags & EXEC_P) {
 		if (prev == 1)
 			printf(", ");
 		printf("EXEC_P");
 		prev = 1;
 	}
-	if (s->flags & HAS_SYMS){
+	if (s->flags & HAS_SYMS) {
 		if (prev == 1)
 			printf(", ");
 		printf("HAS_SYMS");
@@ -79,7 +80,7 @@ int	print_header_32(int type, t_data *s)
 		s->flags |= DYNAMIC;
 	else if (type == ET_REL)
 		s->flags |= HAS_RELOC;
-	while (i < s->elf32_ehdr->e_shnum){
+	while (i < s->elf32_ehdr->e_shnum) {
 		if (s->elf32_shdr[i].sh_type == SHT_SYMTAB
 			|| s->elf32_shdr[i].sh_type == SHT_DYNSYM)
 			s->flags |= HAS_SYMS;

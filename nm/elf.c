@@ -12,7 +12,7 @@ int     is_elf(t_data *s, char *file)
 	Elf64_Ehdr      *elf_test;
 
 	s->file_data = mmap(NULL, s->filesize, PROT_READ, MAP_SHARED, s->fd, 0);
-	if (s->file_data == MAP_FAILED){
+	if (s->file_data == MAP_FAILED) {
 		fprintf(stderr, "./my_objdump: '%s': ", file);
 		fprintf(stderr, "memory dumped\n");
 		return (0);

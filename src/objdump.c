@@ -14,7 +14,7 @@ int	check_file2(char *str, t_data *s)
 	stat(str, &p);
 	if (p.st_size == 0)
 		return (0);
-	else if (!S_ISREG(p.st_mode)){
+	else if (!S_ISREG(p.st_mode)) {
 		close(s->fd);
 		fprintf(stderr, "./my_objdump: '%s' ", str);
 		fprintf(stderr, "is not an ordinary file\n");

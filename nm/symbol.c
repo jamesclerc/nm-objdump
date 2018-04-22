@@ -12,7 +12,7 @@ char find_type3(t_data *s, int i)
 	Elf32_Word flag = s->elf64_shdr[s->symb[i].st_shndx].sh_flags;
 	uint32_t x = s->elf64_shdr[s->symb[i].st_shndx].sh_type;
 
-	if (x == SHT_NOBITS){
+	if (x == SHT_NOBITS) {
 		if (flag == (SHF_ALLOC | SHF_WRITE) ||
 		flag == (SHF_ALLOC | SHF_WRITE | SHF_TLS))
 			return ('b');
@@ -85,7 +85,7 @@ t_symb **get_symbol(t_data *s)
 	t_symb **sym = calloc(sizeof(t_symb), nb_sym);
 
 	s->id = 0;
-	while (i < nb_sym){
+	while (i < nb_sym) {
 		if (s->symb[i].st_info != STT_FILE
 			&& s->symb[i].st_name != 0) {
 			sym[s->id] = sym_tab_create(s, i);
